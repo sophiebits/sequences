@@ -1,5 +1,6 @@
 \documentclass[12pt,letterpaper]{article}
 \usepackage{amsmath,amssymb,fullpage}
+\usepackage[normalem]{ulem}
 \author{Pavel Panchekha}
 \title{Sequences, Series and Recursion}
 \renewcommand{\th}{\ensuremath{^{\text{th}}}}
@@ -300,8 +301,8 @@ $2n$, so that it's similar to regular calculus. Note, though, that
 $n^2 - n$'s finite derivative is $2n$. What
 about $n^3$? What's it's replacement? Do we have to get these
 experimentally? Is there a general rule? There is. Consider
-$n^{\underbar k}$ = $n (n-1) (n-2) (n-3) \cdots (n-k+1)$. Prove for
-yourself that $\frac{\Delta}{\Delta n} n^{\underbar k} = k n^{k-1}$.
+$n^{\uline k}$ = $n (n-1) (n-2) (n-3) \cdots (n-k+1)$. Prove for
+yourself that $\frac{\Delta}{\Delta n} n^{\uline k} = k n^{k-1}$.
 
 Now, I really want to get to resolving our problem yet again, but I'll
 get back to other cool applications of finite calculus. For now,
@@ -310,7 +311,7 @@ finite calculus (the proof is straightforward, if you know the proof
 in regular calculus; it is, however, tedious). So, what does that
 mean? That, there's an operator $T_k$, where $T_k f(n)$ is defined as
 $$\sum_{l=0}^{\infty} \frac{\left(\frac{\Delta}{\Delta n} f\right)(k)}{l!}
-(n-k)^{\underbar l},$$ and that (provided certain conditions are met) $T_k f(n)$
+(n-k)^{\uline l},$$ and that (provided certain conditions are met) $T_k f(n)$
 is equal to $f(n)$ (at least in a region around $k$). Now, simplifying
 the above a bit and setting $k$ to be 0, we get $$\sum_{l=0}^\infty
 \binom{n}{l} \left(\frac{\Delta}{\Delta n} f\right)(0).$$
