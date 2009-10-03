@@ -51,7 +51,7 @@ $\frac{n-1}{2}$ pairs of size $2 a_1 + (n - 1) d$ and a singleton of
 half that size. So the final result is
 
 $$a_1 (n - 1) + (n - 1)^2 d + \frac{a_1 + \frac{n - 1}{2} d}{2} \\
-= a_1 + d \frac{n (n-1)}{2}$$
+= a_1 n + d \frac{n (n-1)}{2}$$
 
 which is the same. Cool!
 
@@ -71,7 +71,7 @@ we call such a recursive definition homogeneous; if $f$ doesn't depend
 on anything except the last $k$ terms, we say the definition is
 k\th-order. In general, however, we only care about two very
 specific classes of recursive definitions: k\th-order linear and
-everything else. A\th-order linear recursive equation is one of
+everything else. A $k$\th-order linear recursive equation is one of
 the form:
 
 $$a_n = b_1 a_{n-1} + b_2 a_{n-2} + ... + b_k a_{n - k} + g(n)$$
@@ -166,7 +166,7 @@ If the starting values are $a_1 = 3, a_2 = 5$, we have $3, 5, 7, 9, 11, \ldots$.
 In general, the sequence looks like it's doing a linear extrapolation of
 the starting values. Let's see why.
 
-We'll use characteristics polynomials. Forming the characteristic polynomial,
+We'll use characteristic polynomials. Forming the characteristic polynomial,
 we get $\lambda^2 = 2\lambda - 1$. We instantly see that this factors, giving
 $(\lambda - 1)^2 = 0$, so 1 is a double root. Now, since it's a double root,
 the closed form we get will have a coefficient in front of $r_0^n$ that is
@@ -213,10 +213,10 @@ far off are we?
 Let's try a few simple examples. If we call the $P(n)$ the value we're trying to find, we
 see that:
 \begin{eqnarray*}
-P(0) &= 1 \text{(instead of 2)}\\
-P(1) &= 3 \text{(instead of 4)}\\
-P(2) &= 3\cdot4-3\cdot2+1 = 7 \text{(instead of 8)}\\
-P(3) &= 4\cdot8-6\cdot4+4\cdot2-1 = 15 \text{(instead of 16)}
+P(0) &= 1 \text{ (instead of 2)}\\
+P(1) &= 3 \text{ (instead of 4)}\\
+P(2) &= 3\cdot4-3\cdot2+1 = 7 \text{ (instead of 8)}\\
+P(3) &= 4\cdot8-6\cdot4+4\cdot2-1 = 15 \text{ (instead of 16)}
 \end{eqnarray*}
 I don't know about you, but I see a pattern. Let's try to prove it.
 
@@ -278,7 +278,7 @@ Now, if we have a function $f(n)$, we can define the \emph{finite
 derivative} $\frac{\Delta f}{\Delta n}$ to be $f(n+1)-f(n)$, that is,
 the finite difference of the sequence $a_n = f(n)$. You'll note that
 this definition is somewhat similar to the calculus definition:
-$$\frac{df}{dx} = \lim_{h\to0}\frac{f(x+h) - f(x)}{h}.$$ Except when
+$$\frac{df}{dx} = \lim_{h\to0}\frac{f(x+h) - f(x)}{h},$$ but when
 we say $\lim_{a\to b}$, we mean ``get $a$ as close as you can to $b$
 without getting there''. And in the integers, the closest you can get
 is within one, so the normal derivative becomes the finite
@@ -286,7 +286,7 @@ derivative.
 
 Why is this useful? Well, it's really cool, and there's a lot more to
 say on this subject that I will\footnote{See:
-\texttt{http://www.stanford.edu/~dgleich/publications/finite-calculus.pdf}},
+\texttt{http://www.stanford.edu/\string~dgleich/publications/finite-calculus.pdf}},
 but there are a few applications we want to use on our problem above,
 to actually explain why the answer is $2^{n+1}-1$.
 
@@ -295,9 +295,9 @@ What is $\frac{\Delta}{\Delta n} 2^n$? $2^n$ -- we proved that above
 especially if you know regular calculus, where the equivalent function
 is $e^x$ (which is part of why $e$ is so important).
 
-What about $n^2$? $(n+1)^2 - n^2 = 2n - 1$. Hmm. We'd like it to be
+What about $n^2$? $(n+1)^2 - n^2 = 2n + 1$. Hmm. We'd like it to be
 $2n$, so that it's similar to regular calculus. Note, though, that
-$n^2 + n$'s finite derivative if $2n$. What
+$n^2 - n$'s finite derivative is $2n$. What
 about $n^3$? What's it's replacement? Do we have to get these
 experimentally? Is there a general rule? There is. Consider
 $n^{\underbar k}$ = $n (n-1) (n-2) (n-3) \cdots (n-k+1)$. Prove for
@@ -320,7 +320,7 @@ nowhere? It's also crucial to our problem. As in regular Taylor's
 theorem, there's a sense in which $T f(n)$, if you cut it down to the
 first $k+1$ terms, is the best $k$-th order polynomial approximation
 to $f(n)$. So, to solve the above problem, we just have to consider
-the Taylor expansion of $2^{n+1}$, with the $n+2$-nd term chopped off.
+the Taylor expansion of $2^{n+1}$, with the $(n+2)$-nd term chopped off.
 
 What's the Taylor expansion of $2^{n+1}$? Since $\frac{\Delta}{\Delta
 n} 2^n = 2^n$, and $2^0 = 1$, it's $\binom{n}{0} + \binom{n}{1} +
@@ -342,7 +342,7 @@ going to get $63, 122$. Isn't that cool?
 
 \section{More}
 For more on finite calculus, including a great tutorial, I'm again going to suggest
-\begin{center}\texttt{http://www.stanford.edu/~dgleich/publications/finite-calculus.pdf}\end{center}
+\begin{center}\texttt{http://www.stanford.edu/\string~dgleich/publications/finite-calculus.pdf}\end{center}
 
 On the subject of characteristic polynomials, there's a wonderful
 compilation of good problems at and much of the same material as here
@@ -351,6 +351,6 @@ at
 
 Wikipedia is, as always, your friend. it's article on recurrence
 relations is pretty good; find it at
-\begin{center}\texttt{http://en.wikipedia.org/wiki/Recurrence\_relation},\end{center}
+\begin{center}\texttt{http://en.wikipedia.org/wiki/Recurrence\string_relation}.\end{center}
 
 \end{document}
