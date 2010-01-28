@@ -1,0 +1,66 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{amsmath,amssymb,fullpage}
+\usepackage[normalem]{ulem}
+\author{Pavel Panchekha}
+\title{Sequences, Series, and Recursion}
+
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+\setcounter{secnumdepth}{-1}
+
+\begin{document}
+\maketitle
+
+\section{Problem Section 1}
+\begin{enumerate}
+\item Above, we saw that $n^2$, a quadratic, has a linear finite difference
+sequence. Prove this for all quadratic sequences.
+\item What about cubics?
+\item What about an $n$th order polynomial?
+\end{enumerate}
+
+\section{Problem Section 2}
+\begin{enumerate}
+  \item The ``Tribonacci'' sequence is defined by $T_{n+3} = T_{n+2} + T_{n+1}
+  + T_n$ and the starting values $T_1 = T_2 = T_3 = 1$. Find the smallest $n$
+  for which $T_n$ is over 9000. A computer would be helpful, but don't just
+  brute force it.
+  \item Given a set of 3 initial values, what does the sequence $a_{n+3} =
+  3a_{n+2} - 3a_{n+1} + a_n$ do?
+\end{enumerate}
+
+\section{Problem Section 3}
+\begin{enumerate}
+  \item Find a recursive definition for the sequence whose closed form is $a_n =
+  (n^2 + 1) 2^n + 1$.
+  \item A 3rd order polynomial $P$ has the property that $P(1) = 1$, $P(2) = 18$,
+  $P(4) = 17$, and $P(5) = 23$. Find $P(3)$.
+  \item Check whether there exists a quintic $P$ such that $P(0) = 0$, $P(1) = 1$, $P(2) = -2$,
+  $P(3) = 3$, $P(4) = -4$, $P(5) = 5$, and $P(6) = -3$.
+\end{enumerate}
+
+\section{Problem Section 4}
+\begin{enumerate}
+\item What happens if we add the solution to our recurrence back into the
+recurrence? As in, what if we have $a_{n+2} = a_{n+1} + a_n + F_n$, where the
+inhomogenizing term has the same recurrence relation as the rest of the recurrence?
+\item ``Verify'' the formulae for sums of arithmetic and geometric series using
+a cool application of inhomogenous recurrence relations.
+\item Find a way to get the partial sums of a recurrence relation in explicit
+form. This is really cool, so I highly suggest you do it.
+\end{enumerate}
+
+\section{More}
+For more on finite calculus, including a great tutorial, I'm again going to suggest
+\begin{center}\texttt{http://www.stanford.edu/\string~dgleich/publications/finite-calculus.pdf}.\end{center}
+
+On the subject of characteristic polynomials, there's a wonderful
+compilation of good problems (and much of the same material as here)
+at
+\begin{center}\texttt{http://mathcircle.berkeley.edu/BMC3/Bjorn1/Bjorn1.html}.\end{center}
+
+Wikipedia is, as always, your friend. Its article on recurrences
+is pretty good; find it at
+\begin{center}\texttt{http://en.wikipedia.org/wiki/Recurrence\string_relation}.\end{center}
+
+\end{document}

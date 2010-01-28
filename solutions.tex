@@ -1,0 +1,165 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{amsmath,amssymb,fullpage}
+\usepackage[normalem]{ulem}
+\author{Pavel Panchekha}
+\title{Sequences, Series, and Recursion}
+
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+\setcounter{secnumdepth}{-1}
+
+\begin{document}
+\maketitle
+
+\section{Problem Section 1}
+\subsection{Problem 1}
+\emph{Above, we saw that $n^2$, a quadratic, has a linear finite difference
+sequence. Prove this for all quadratic sequences.}
+
+If your sequence is $An^2 + Bn + C$, then the finite differences are of the
+form $A[(n+1)^2-n^2] + B[(n+1) - n] + C[1-1] = (2A)n + (A + B)$, which is
+linear
+
+\subsection{Problem 2}
+\emph{What about cubics?}
+
+We can assume that our cubic is of form $An^3 + f(n)$, where $f(n)$ is quadratic.
+Now, our finite differences are $A[(n+1)^3 - n^3] + [f(n+1) - f(n)]$. The
+finite differences of the second term are linear (we just proved that), and the
+first term becomes quadratic, so we're done.
+
+\subsection{Problem 3}
+\emph{What about an $n$th order polynomial?}
+
+Induct. When you expand $(n+1)^k$, the $n^k$ term has coefficient 1, so you remove
+it when you do a finite difference. Now, you're just an induction away.
+
+\pagebreak
+\section{Problem Section 2}
+\subsection{Problem 1}
+\emph{The ``Tribonacci'' sequence is defined by $T_{n+3} = T_{n+2} + T_{n+1}
+  + T_n$ and the starting values $T_1 = T_2 = T_3 = 1$. Find the smallest $n$
+  for which $T_n$ is over 9000. A computer would be helpful, but don't just
+  brute force it.}
+
+I warn you, this problem is somewhat hard. Let's begin. We first find the
+characteristic polynomial, $P(\lambda) = \lambda^3 - \lambda^2 - \lambda - 1$. Now we need
+to find roots, but this polynomial does not factor in any nice way. What you
+can do, however, is estimate. $P(1) = 1 - 1 - 1 - 1 = -2$, and $P(2) = 8 - 4 - 2 - 1 = 1$,
+so we know that our answer is close to 2. We can check $1.8$ or so, and we find
+that $P(1.8)\approx-.3$. Whatever, that's close enough. Now, this $1.8^n$
+term has some coefficient in front of it. I wonder what it is\dots The sequence
+starts out 1, 1, 1, 3, 5, 9, 17, 31, so $A 1.8^8 = 31$. This implies that
+$A\approx\frac18$, or that we're about 3 terms behind. Now we just need to find
+$n$ such that $1.8^n=9000$. Well, we can take logs in our head (right?), and
+we know that $\log 2 = .693$, $\log 3 = 1.1$, $\log 10 = 2.3$, so we know that
+$\log 9000 = 6.9 + 1.1 + 1.1 = 9.1$ and that $\log 1.8 = 2*1.1 + .693 - 2.4 = .59$.
+We divide to get $n \approx 9.1/.59 = 91/5.9 \approx 15$. Now, we add the three
+terms that we are behind to get 18, which is our final answer.
+
+By the way, it migh strike you that you could have just done the 18 terms and
+and there. Well, yes, you could, but suppose I asked not about 9000 but about
+$10^{10}$. Then you can calculate an answer of 41, but that's a lot more tedious.
+What if I asked for $10^{100}$? Well, you'd have to be a bit careful about your
+math, but you can pretty easily calculate it to be the 381 term.
+
+\subsection{Problem 2}
+\emph{Given a set of 3 initial values, what does the sequence $a_{n+3} =
+  3a_{n+2} - 3a_{n+1} + a_n$ do?}
+
+Try it:
+\begin{align*}
+&1, 1, 1: 1, 1, 1, \dots \\
+&1, 1, 1: 4, 7, 11, \dots \\
+&1, 2, 3: 4, 5, 6, \dots \\
+&1, 3, 6: 10, 15, 21, \dots
+\end{align*}
+
+Quadratic approximation is the answer. Proof of this follows in the next section.
+
+\pagebreak
+\section{Problem Section 3}
+\subsection{Problem 1}
+\emph{Find a recursive definition for the sequence whose closed form is $a_n =
+  (n^2 + 1) 2^n + 1$.}
+
+Let's abstract that closed form a bit: $(An^2 + Bn + C)2^n + D 1^n$. You should
+recognize this as being the result of a characteristic polynomial: $(\lambda - 2)^3(\lambda - 1)$.
+You can multiply this out to get $\lambda^4 - 7\lambda^3 + 18\lambda^2 - 20\lambda + 1$.
+Finally, we can get from this the actual recurrence: $a_{n+4} = 7a_{n+3} - 18a_{n+2} + 20a_{n+1} + a_n$.
+Note that the exponents in our characteristic polynomial could be bigger --- there
+would be associated coefficients in our closed form, but we'd just set them to
+0. In other words, every sequence satisfies infinitely many recurrence relations.
+
+\subsection{Problem 2}
+\emph{A 3rd order polynomial $P$ has the property that $P(1) = 1$, $P(2) = 18$,
+  $P(4) = 17$, and $P(5) = 23$. Find $P(3)$.}
+
+Let's say that $P(3) = x$. Then we can use our cool polynomial extrapolation
+formula: $23 = 4 \cdot 17 - 6x + 4 \cdot 18 - 1$, or $116 = 6x$, giving you
+the final answer of $x = \frac{58}{3}$.
+
+\subsection{Problem 3}
+\emph{Check whether there exists a quintic $P$ such that $P(0) = 0$, $P(1) = 1$,
+$P(2) = -2$, $P(3) = 3$, $P(4) = -4$, $P(5) = 5$, and $P(6) = -3$.}
+
+Using our polynomial extrapolation formula, we see that $-3 =6\cdot5 + 15\cdot4
++ 20\cdot3 + 15\cdot2 + 6\cdot1 - 1\cdot0$, clearly impossible. Or, you could
+note that the intermediate value theorem would require our polynomial to have
+6 roots, clearly impossible if it were quintic.
+
+\pagebreak
+\section{Problem Section 4}
+\subsection{Problem 1}
+\emph{What happens if we add the solution to our recurrence back into the
+recurrence? As in, what if we have $a_{n+2} = a_{n+1} + a_n + F_n$, where the
+inhomogenizing term has the same recurrence relation as the rest of the recurrence?}
+
+I'm giving you no help on this one, because it's hard and nasty. Have fun!
+
+\subsection{Problem 2}
+\emph{``Verify'' the formulae for sums of arithmetic and geometric series using
+a cool application of inhomogenous recurrence relations.}
+
+The basic idea here is to consider the sequence $a_{n+1} = a_n + f(n)$, where
+$f(n)$ is either $a + (n-1)d$ or $a r^{n-1}$. In the first case, the characteristic
+polynomial of $f(n)$ is $(\lambda-1)^2$, so the characteristic polynomial of $\{a\}_n$
+is $(\lambda-1)^3$. That gives us the overall formula $An^2 + Bn + C$, with
+$a_0 = a$, $a_1 = a + (a + d) = 2a + d$, and $a_2 = 2a + d + (a + 2d) = 3a + 3d$
+(note: we've set our sequence to start at 0 here. This simplifies things).
+Now we have that $C = a$, $A + B + C = 2a + d$, $4A + 2B + C = 3a + 3d$, which
+gives $2A = d$, $B = a + \frac12 d$. This leaves you with $a_n = a n + d\frac{n(n+1)}2$.
+I leave it to you to check that this is the same as we derived at the start of
+the talk.
+
+For the geometric series, we have $a_{n+1} = a_n + f(n)$, where $f(n) = a r^n$.
+Now, the characteristic polynomial for $f(n)$ is $\lambda - r$. If we assume
+that $r$ is not equal to 1 (otherwise, we're looking at an arithmetic sequence),
+the characteristic polynomial for $a_n$ must be $(\lambda - 1)(\lambda - r)$, and
+so your sequence is $A r^n + B$ (the $r=1$ case must be special cased, for then
+we'd need to $Ar^n + B$ but $Anr^n + B$). Well, $a_0 = a$ and $a_1 = ar$, so
+we have $A + B = a$, $Ar + B = a + ar$, giving $A(r-1) = ar$ and $B(r-1)=-a$,
+thus leaving us with $a \frac{r^{n+1}-1}{r-1}$, which we did indeed have before.
+
+\subsection{Problem 3}
+\emph{Find a way to get the partial sums of a recurrence relation in explicit
+form. This is really cool, so I highly suggest you do it.}
+
+This is a hard problem, so I'm not giving you solutions. I'd just hate to ruin your
+fun solving them. If you want a hint, though, I'll give you this: what does the
+sequence $a_{n+1} = a_n + f(n+1)$ give?
+
+\section{More}
+For more on finite calculus, including a great tutorial, I'm again going to suggest
+\begin{center}\texttt{http://www.stanford.edu/\string~dgleich/publications/finite-calculus.pdf}.\end{center}
+
+On the subject of characteristic polynomials, there's a wonderful
+compilation of good problems (and much of the same material as here)
+at
+\begin{center}\texttt{http://mathcircle.berkeley.edu/BMC3/Bjorn1/Bjorn1.html}.\end{center}
+
+Wikipedia is, as always, your friend. Its article on recurrences
+is pretty good; find it at
+\begin{center}\texttt{http://en.wikipedia.org/wiki/Recurrence\string_relation}.\end{center}
+
+\end{document}

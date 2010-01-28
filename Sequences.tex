@@ -55,26 +55,60 @@ $$\frac{n-1}{2}(2a_1 + (n-1)d) + \frac{1}{2}(2a_1 + (n-1)d) \\
 
 which is the same as what we got for even $n$. Cool!
 
-Now, for geometric sequences, we use the fact that $\frac{r^n - 1}{r
-  - 1}$ is equal to $1 + r + r^2 + r^3 + \cdots + r^{n-1}$. From this, we
-see that the sum of a geometric sequence is $a_1 \frac{r^n - 1}{r -
-  1}$. An important note is that in the case of an infinite sum, this
-is equal to $a_1/(1 - r)$.
+Now, for geometric sequences.
+Consider the infinite sum $1 + r + r^2 + \dots$, and let it equal $S$. Then
+$rS = r + r^2 + \dots$, and $S - rS = 1$. Thus, the infinite sum $S$ is equal to
+$1/1-r$. We can use this to find the partial sum: $1 + r + \dots + r^n$ is equal
+to the infinite sum $S$ minus $r^{n+1}S$, or $\frac{r^n - 1}{r - 1}$. From this,
+we see that the sum of a geometric sequence is $a_1 \frac{r^n - 1}{r - 1}$.
+An important note is that in the case of an infinite sum, this is equal to
+$a_1/(1 - r)$.
 
 But anyway, geometric and arithmetic series are boring. Let's move on to
 something more fun!
 
+\section{Finite Differences}
+Another good tool to have to attack sequences, one that is much
+simpler than characteristic polynomials, is finite differences.
+Basically, the finite difference sequence of a sequence $\{a\}_n$ is the
+sequence $b_n = a_{n+1} - a_n$. It can give insight into how a
+sequence works.
+
+For example, if you have the sequence $1, 4, 9, 16, 25, \ldots\,$, the
+finite differences are the sequence of odd numbers $3, 5, 7, 9, \ldots$ (prove it!).
+The finite differences of this are just $2, 2, 2, \ldots\,$. Now, there are
+a few obvious properties. Firstly, any linear sequence has
+constant finite differences (prove it!). Also, if you have the
+geometric sequence $a_n = a_0 r^n$, the finite difference is
+$b_n = a_0 (r-1) r^n$ (prove it!).
+
+\section{Problem Section 1}
+\begin{enumerate}
+\item Above, we saw that $n^2$, a quadratic, has a linear finite difference
+sequence. Prove this for all quadratic sequences.
+\item What about cubics?
+\item What about an $n$th order polynomial?
+\end{enumerate}
+
 \section{Recursively Defined Sequences}
 In the very general case, recursively defined sequences are those of
-the form $$a_n = f(a_1, a_2, a_3, \ldots, a_{n-1}) + g(n).$$ We call such a
+the form $$a_n = f(a_1, a_2, a_3, \dots, a_{n-1}) + g(n).$$ We call such a
 recursive definition homogeneous if $g(n) = 0$. If $f$ doesn't depend
 on anything except the last $k$ terms, we say the definition is
 $k$th-order. In general, however, we only care about two very
 specific classes of recursive definitions: $k$th-order linear recurrences and
 everything else. A $k$th-order linear recursive equation is one of
 the form:
-
 $$a_n = b_1 a_{n-1} + b_2 a_{n-2} + \cdots + b_k a_{n - k} + g(n).$$
+I'll add a quote here, by Richard Feynman: Classification of mathematical
+problems as linear and nonlinear is like classification of the Universe as
+bananas and non-bananas. Alas, it's true. But linear problems are usually the
+only solveable ones, so we have to deal\footnote{Not convinced that non-linear
+problems are hard? Try the following recurrence: $a_{n+1} = 4a_n(1-a_n)$, with
+$a_1 = 1/3$. No, try it for $a_1 = 1/3 + 10^{-10}$, and note how after a while,
+the solutions diverge completely. This is the so-called butterfly effect: errors
+will grow unboundedly in most non-linear systems. You can't get this in a linear
+system.}.
 
 Generally, we try as best we can to avoid non-homogeneous
 relations. Now, let's look at a problem that has to do with linear
@@ -94,8 +128,11 @@ is the number of rabbits the month before. Thus, we quickly derive the
 recurrence relation $R_{n+2} = R_{n+1} + R_n$. Now, this is cool, and
 we can quickly get lots of terms, but how about a closed form?
 
-To find a closed form, we pretend that the closed form expression is of the
-form $R_n = \lambda^n$. Now, substituting in, we see that
+To find a closed form, we assume that the closed form expression is of the
+form $R_n = \lambda^n$. Actually, $R_n$ clearly is \emph{not} just an exponential,
+because then $\lambda^1 = \lambda^2$, giving us $\lambda=1$, or $R_n=1$, but
+what we're doing here is called ansatz --- making an educated guess and building
+on the results. Anyway, substituting in our guess gives us
 
 \begin{align*}
 \lambda^n & = \lambda^{n-1} + \lambda^{n-2} \\
@@ -104,9 +141,12 @@ form $R_n = \lambda^n$. Now, substituting in, we see that
         & = \dfrac{1 \pm \sqrt{5}}{2}.
 \end{align*}
 
-Now, we'll call the positive case $\phi$, and we note that the minus
-case is really just $\frac1{-\phi}$. Now we plug in these values, and get
-that $R_n = A \phi^n + B (-\phi)^{-n}$. Since we know the starting
+Now we think. If we have some sequence $\{a\}_n$ which satisfies our recurrence,
+and some other sequence ($\{b\}_n$, say), then $\{a+b\}_n$ clearly also does
+(check it!), as does $\{k a\}_n$ for some constant $k$. So if we call our two
+solutions above $\phi$ (that's the positive one) and $\phi '$ (we'll note that
+it's really just $\frac1{-\phi}$), we can say that $A\phi^n + B(-\phi)^{-n}$ is
+the solution to our recurrence. Since we know the starting
 values ($R_1 = 1$, $R_2 = 1$), we can plug in and solve for $A$ and
 $B$:
 
@@ -134,14 +174,16 @@ $$R_n = \frac{\phi^n - (-\phi)^{-n}}{\sqrt{5}}.$$
 By the way, you should all recognize this as the Fibonacci sequence. We
 can make the formula we derived even nicer by noticing that
 $(-\phi)^{-1}$ term is less than $1/2$ for $n \ge 2$, so we can just ignore
-it and get the simpler formula $$R_n \approx
-\frac1{\sqrt{5}} \phi^n.$$
+it and get the simpler formula $$R_n \approx \frac1{\sqrt{5}} \phi^n.$$ This
+formula is never off by more than $1/2$, so we can just round the result to the
+nearest integer to get our answer.
 
-\section{Problem Section 1}
+\section{Problem Section 2}
 \begin{enumerate}
   \item The ``Tribonacci'' sequence is defined by $T_{n+3} = T_{n+2} + T_{n+1}
-  + T_n$ and the starting values $T_1 = T_2 = T_3 = 1$. Find the smallest $n$ for which $T_n$ is over
-  9000.
+  + T_n$ and the starting values $T_1 = T_2 = T_3 = 1$. Find the smallest $n$
+  for which $T_n$ is over 9000. A computer would be helpful, but don't just
+  brute force it.
   \item Given a set of 3 initial values, what does the sequence $a_{n+3} =
   3a_{n+2} - 3a_{n+1} + a_n$ do?
 \end{enumerate}
@@ -154,7 +196,11 @@ $r_0, r_1, \ldots, r_k$ lets us write the closed form expression in the
 form $a_n = C_0 r_0^n + C_1 r_1^n + \cdots + C_k r_k^n$. One important
 thing to note is that if one of the roots is a double root or
 $k$th-order root, the corresponding coefficient will instead be a $(k-1)$-order
-polynomial.
+polynomial. By the way, some of your roots may be complex. For example, consider
+the recurrence $a_{n+2} = -a_n$, with initial values $a_0 = 0$, $a_1 = 1$. This
+is the sequence $\sin \frac{\pi}{2} n$, and has characteristic polynomial
+$\lambda^2 = -1$. Clearly, this has no real roots. But you can solve it to get
+$a_n = \frac{1}{2i}(i^n - i^{-n})$.
 
 Here's an example where the roots can have multiplicities. Given a
 sequence $a$ where $a_{n+2} = 2a_{n+1} - a_n$, describe what
@@ -185,7 +231,7 @@ This also proves the nontrivial property that if the value of an
 $n$th-order polynomial is integral at $n+1$ consecutive points, it is integral
 for any integer argument.
 
-\section{Problem Section 2}
+\section{Problem Section 3}
 \begin{enumerate}
   \item Find a recursive definition for the sequence whose closed form is $a_n =
   (n^2 + 1) 2^n + 1$.
@@ -210,8 +256,9 @@ we don't recognize that the sequence is just the powers of two (silly us!), so w
 asked for the next term, we just do a polynomial approximation. How
 far off are we?
 
-Let's try a few simple examples. If we call the $P(n)$ the value we're trying to find, we
-see that:
+Let's try a few simple examples. If we call the $P(n)$ the value we're trying to
+find, we can use that polynomial extrapolation formula we got in the last
+section to see that:
 \begin{align*}
 P(1) &= 1 = 1 \\
 P(2) &= 2\cdot2-1 = 3 \\
@@ -221,37 +268,15 @@ P(4) &= 4\cdot8-6\cdot4+4\cdot2-1 = 15
 Note that in each case, $P(n)$ is exactly one less than $2^n$. Let's try to prove it.
 
 Now, since we have a shiny new hammer (ooh, characteristic polynomials\ldots\ shiny!), let's try
-to hit this problem on the head with it. We know that we're going to need the value of $$
-\sum_{k=0}^{n} (-1)^n \binom{n+1}{n-k} 2^{n-k}.$$ How do we do it? Let's simplify a bit, by
+to hit this problem on the head with it. We know (by again using our polynomial
+extrapolation trick) that we're going to need the value of
+$$\sum_{k=0}^{n} (-1)^n \binom{n+1}{n-k} 2^{n-k}.$$ How do we do it? Let's simplify a bit, by
 subtracting this from $2^n$: $$2^{n+1} - \sum_{k=0}^{n+1} (-1)^k \binom{n+1}{k} 2^{n+1-k}.$$
 
-Notice anything? It looks like the binomial theorem: the above is equivalent to $(-1 + 2) ^ k = 1$,
+Notice anything? It looks like the binomial theorem: the above sum is equivalent to $(-1 + 2) ^ k = 1$,
 so in every case, we are off by exactly 1, in that we always end up with something one less
 than the correct value. This proof, by the way, though slick, is
 rather opaque -- the reason the value is one away is rather non-obvious.
-
-\section{Finite Differences}
-Another good tool to have to attack sequences, one that is much
-simpler than characteristic polynomials, is finite differences.
-Basically, the finite differences of a sequence $a_n$ are the
-sequence $b_n = a_{n+1} - a_n$. These can give insight into how a
-sequence works.
-
-For example, if you have the sequence $1, 4, 9, 16, 25, \ldots\,$, the
-finite differences make the sequence of odd numbers $3, 5, 7, 9, \ldots$ (prove it!).
-The finite differences of this are just $2, 2, 2, \ldots\,$. Now, there are
-a few obvious properties. Firstly, any linear sequence has
-constant finite differences (prove it!). Also, if you have the
-geometric sequence $a_n = a_0 r^n$, the finite difference is
-$b_n = a_0 (r-1) r^n$ (prove it!).
-
-\section{Problem Section 3}
-\begin{enumerate}
-\item Above, we saw that $n^2$, a quadratic, has a linear finite difference
-sequence. Prove this for all quadratic sequences.
-\item What about cubics?
-\item What about an $n$th order polynomial?
-\end{enumerate}
 
 \section{Rewind}
 So, let's go back to the problem we had before, on the estimation of
@@ -267,9 +292,97 @@ single number, which obviously has a constant polynomial
 approximation. You can then extend that sequence, and work backwards.
 
 This actually leads to a trivial proof of what we had above. Consider
-the finite differences of $1, 2, 4, \ldots, 2^n, 2^{n+1}-1$. What is
-it? $1, 2, 4, \ldots, 2^{n-1}, 2^n-1$ (check it!)! So, all we need is
-some trivial induction to prove our claim above.
+the finite differences of $1, 2, 4, \ldots, 2^n, 2^{n+1}-1$. What are they?
+$1, 2, 4, \ldots, 2^{n-1}, 2^n-1$ (check it!)! So, all we need is some trivial
+induction to prove our claim above.
+
+\section{Inhomogenous Recurrence Relations}
+You know how you're only supposed to buy milk that's been homogenized? Well, the
+same applies to linear recurrence relations. Only solve homogenous ones.
+
+Well, sort of. Because there's actually a lot of cool things you can do with
+inhomogenous ones as well. To start with, here's an example: $$a_{n+1} = a_n + d$$
+Now, we've seen this before. In fact, we solved it in the very beginning of the
+talk: it's an arithmetic series. But our shiny cool new toys get pwned by this
+really trivial stupid problem. What to do! Aha, don't worry! There's a cool
+trick involved here. If $a_{n+1} = a_n + d$, then $a_{n+2} = a_{n+1} + d$, right?
+And that means that $a_{n+2} - a_{n+1} = a_{n+1} - a_n$. We rearrange this and
+find the characteristic polynomial, which is $(\lambda-1)^2$. Then, we can just
+solve our recurrence the usual way. We know that $a_n = An + B$, and from
+$a_1 = a$, $a_2 = a + d$, we see that $A=a$, $B=d$. Now, note that $a_2 = a + d$
+was not one of the initial conditions; we needed to use our recurrence to get
+that. In general, when solving inhomogenous relations, you'll need to apply
+your recurrence several times to get extra ``initial conditions''.
+
+What about a harder problem? Like this one: $$a_{n+2} = a_{n+1} + 3a_n + F_n$$
+where $F_n$ is the $n$th Fibonacci number. Well, how are we going to solve this?
+We can use a trick similar to the one we just used. Take the three relations
+\begin{align*}
+a_{n+4} &= a_{n+3} + 3a_{n+2} + F_{n+2} \\
+a_{n+3} &= a_{n+2} + 3a_{n+1} + F_{n+1} \\
+a_{n+2} &= a_{n+1} + 3a_n + F_n
+\end{align*}
+Now we can subtract the second and third equations from the first, cancelling
+the Fibonacci terms (due to their recursive relation) and leaving us with
+$$a_{n+4} - 2a_{n+3} - 3a_{n+2} + 4a_{n+1} + 3a_n = 0,$$ which we can solve in
+the usual way (the characteristic polynomial: $(\lambda^2 - \lambda - 1)(\lambda^2
+- \lambda - 3)$) I won't go through the actual solution here, it's ugly; suffice
+it to say that the roots are approximately $1.6$, $-.6$, $-1.3$, and $2.3$.
+
+OK, generalizing time! Let's say that the inhomogenizing term is some arbitrary
+thing, but it has a recurrence relation. So, basically, we have
+$$c_k a_{n+k} + c_{k-1} a_{n+k-1} + \cdots + c_0 a_n = f(n),$$ where
+$$d_m f(n+m) + d_{m-1} f(n+m) + \cdots + d_0 f(n) = 0.$$
+
+What do we do now? Well, we want to cancel all of the $f$ terms, so we can just
+add the first equation times $d_m$ and shifted over $m$, times $d_{m-1}$ shifted
+over $m-1$, and so on. We get:
+\begin{align}
+&d_m &(c_k a_{n+k+m} + c_{k-1} a_{n+k+m-1} + \cdots + c_1 a_{n+m+1} + c_0 a_{n+m}) \\
++&d_{m-1} &(c_k a_{n+k+m-1} + c_{k-1} a_{n+k+m-2} + \cdots + c_1 a_{n+m} + c_0 a_{n+m-1}) \\
++&\dots& \\
++&d_{1} &(c_k a_{n+k+1} + c_{k-1} a_{n+k} + \cdots + c_1 a_{n+2} + c_0 a_{n+1}) \\
++&d_{0} &(c_k a_{n+k} + c_{k-1} a_{n+k-1} + \cdots + c_1 a_{n+1} + c_0 a_{n})
+\end{align}
+Now, we regroup this by the $a_n$ terms:
+\begin{align*}
+&(d_m c_k)&a_{n+k+m} \\
++&(d_{m-1} c_k + d_m c_{k-1})&a_{n+k+m-1} \\
++&(d_{m-2} c_k + d_{m-1} c_{k-1} + d_m c_{k-2})&a_{n+k+m-2} \\
++&\dots&\\
++&(d_1 c_0 + d_0 c_1)&a_{n+1} \\
++&(d_0 c_0)&a_n \\
+=&0&
+\end{align*}
+Form the characteristic polynomial:
+$$(d_m c_k) \lambda^{k+m} + (d_{m-1} c_k + d_m c_{k-1}) \lambda^{k+m-1} + \cdots
++ (d_1 c_0 + d_0 c_1) \lambda + (d_0 c_0) = 0$$
+
+Now, compare this to the two polynomials $c_k \lambda^k + c_{k-1} \lambda^{k-1}
++ \cdots + c_1 \lambda + c_0$ and $d_m \lambda^m + d_{m-1} \lambda^{m-1}
++ \cdots + d_1 \lambda + d_0$. Who noticed it? The big polynomial is just the
+product of the two smaller ones! Cool!
+
+Let's do a quick check, for $a_{n+1} = a_n + d$. The polynomial for the left
+is $\lambda - 1$, and for the inhomogenizing term it's got to be $\lambda - 1$
+(check it!). K, does that work? Well, the product is $(\lambda - 1)^2$, which
+gives us the closed form $An + B$, which is indeed correct. Win!
+
+Now, what if the inhomogenizing term has no nice recurrence? Say we want
+$a_{n+2} = 4a_{n+1} - 7a_n + \sin n$? Well, honestly, in that case you're
+completely screwed no matter what, so don't sweat it. Get out your handy dandy
+calculator and start programming.
+
+\section{Problem Section 4}
+\begin{enumerate}
+\item What happens if we add the solution to our recurrence back into the
+recurrence? As in, what if we have $a_{n+2} = a_{n+1} + a_n + F_n$, where the
+inhomogenizing term has the same recurrence relation as the rest of the recurrence?
+\item ``Verify'' the formulae for sums of arithmetic and geometric series using
+a cool application of inhomogenous recurrence relations.
+\item Find a way to get the partial sums of a recurrence relation in explicit
+form. This is really cool, so I highly suggest you do it.
+\end{enumerate}
 
 \section{Hmm\dots\ This Needs More Calculus}
 Doesn't everything?
@@ -340,12 +453,68 @@ off $\binom{n+1}{n} + \binom{n+1}{n+1}$, or $n+2$, so we'll be that
 far off. Extend $1, 2, 4, 8, 16, 32$ two terms out, and you're
 going to get $63$, then $121$. Isn't that cool?
 
+\section{Deleted Footage, Blooper Reals, and Bonus Material}
+So, some of you may protest that though the math works, the \emph{reason} that
+inhomogenous relations work out the way they do is mystical. So let's emplain
+what really happens. Since your recurrence is linear, we can consider it the
+application of a matrix, like so:
+$$
+\left[ \begin{array}{ccccc}
+-\frac{c_{k-1}}{c_k} & -\frac{c_{k-2}}{c_k} & \cdots & -\frac{c_{k-3}}{c_k} & -\frac{c_{k-4}}{c_k} \\
+1 & 0 & \cdots & 0 & 0 \\
+0 & 1 & \cdots & 0 & 0 \\
+\vdots && \ddots && \vdots \\
+0 & 0 & \cdots & 1 & 0
+\end{array} \right] \left[ \begin{array}{c}
+a_{n+k-1} \\
+a_{n+k-2} \\
+a_{n+k-3} \\
+\vdots \\
+a_{n+1} \\
+a_{n} \\
+\end{array} \right] = \left[ \begin{array}{c}
+a_{n+k} \\
+a_{n+k-1} \\
+a_{n+k-2} \\
+\vdots \\
+a_{n+2} \\
+a_{n+1} \\
+\end{array} \right]
+$$
+Now, the basic assertion that we made here was that over the complex numbers
+(since our roots can be complex) this matrix is diagonalizeable. Its eigenvalues
+are just the roots of our characteristic polynomial (convince yourself!). Now,
+what if we have our matrix multiplication, but then a matrix addition? That's
+what you get for nonhomogenous polynomials. Well, if the matrix you're adding
+is a linear recurrence itself, you can represent that by the recurrence's matrix
+operating in higher dimensions and then just offloading its results into the part
+that we're adding. And what would the eigenvalues of this big matrix be? Obviously,
+just the union of the eigenvalues (with associated multiplicities). Which gives
+you the overall polynomial being the product of the two smaller ones.
+
+Now, no lecture would be complete without an open problem. In this case, the
+open problem is: say you have a linear recurrence $c_k a_{n+k} + \cdots + c_0 a_n = 0$.
+Is there an $n$ such that $a_n = 0$. What we want is a decision procedure. Well,
+using the material we learned here, we can see that we reduce the problem to:
+given a linear combination of exponentials over the polynomials, can we determine
+whether the equation has a root? Go forth, solve it, and win the Fields medal.
+I dare you.
+
+Now, if that's an open problem, I hope you'll agree that non-linear recurrences
+are just about impossible. Here's an example: the famous $3n+1$ problem. Take a
+number. I'll use 17 here, for demonstration. Now, if this number is odd (it is)
+multiply it by 3 and add 1. OK, now I have 52. If the number is even (now it is)
+divide it by 2. OK, now 26. Then 13. Then 40. Then 20, 10, 5. Then 16, 8, 4, 2, 1,
+4, 2, 1, 4, 2, 1, \dots The question is, do all numbers eventually reach that
+4, 2, 1 cycle? Now, this recurrence is even almost linear --- each of the two
+options at any point is linear, it's just that the thing overall is highly non-linear.
+
 \section{More}
 For more on finite calculus, including a great tutorial, I'm again going to suggest
 \begin{center}\texttt{http://www.stanford.edu/\string~dgleich/publications/finite-calculus.pdf}.\end{center}
 
 On the subject of characteristic polynomials, there's a wonderful
-compilation of good problems at and much of the same material as here
+compilation of good problems (and much of the same material as here)
 at
 \begin{center}\texttt{http://mathcircle.berkeley.edu/BMC3/Bjorn1/Bjorn1.html}.\end{center}
 
