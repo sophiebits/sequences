@@ -455,12 +455,13 @@ going to get $63$, then $121$. Isn't that cool?
 
 \section{Deleted Footage, Blooper Reals, and Bonus Material}
 So, some of you may protest that though the math works, the \emph{reason} that
-inhomogenous relations work out the way they do is mystical. So let's emplain
+inhomogenous relations work out the way they do is mystical. So let's explain
 what really happens. Since your recurrence is linear, we can consider it the
 application of a matrix, like so:
 $$
 \left[ \begin{array}{ccccc}
--\frac{c_{k-1}}{c_k} & -\frac{c_{k-2}}{c_k} & \cdots & -\frac{c_{k-3}}{c_k} & -\frac{c_{k-4}}{c_k} \\
+-\frac{c_{k-1}}{c_k} & -\frac{c_{k-2}}{c_k} & \cdots &
+-\frac{c_{1}}{c_k} & -\frac{c_{0}}{c_k} \\
 1 & 0 & \cdots & 0 & 0 \\
 0 & 1 & \cdots & 0 & 0 \\
 \vdots && \ddots && \vdots \\
@@ -485,7 +486,7 @@ Now, the basic assertion that we made here was that over the complex numbers
 (since our roots can be complex) this matrix is diagonalizeable. Its eigenvalues
 are just the roots of our characteristic polynomial (convince yourself!). Now,
 what if we have our matrix multiplication, but then a matrix addition? That's
-what you get for nonhomogenous polynomials. Well, if the matrix you're adding
+what you get for inhomogenous polynomials. Well, if the matrix you're adding
 is a linear recurrence itself, you can represent that by the recurrence's matrix
 operating in higher dimensions and then just offloading its results into the part
 that we're adding. And what would the eigenvalues of this big matrix be? Obviously,
@@ -494,7 +495,7 @@ you the overall polynomial being the product of the two smaller ones.
 
 Now, no lecture would be complete without an open problem. In this case, the
 open problem is: say you have a linear recurrence $c_k a_{n+k} + \cdots + c_0 a_n = 0$.
-Is there an $n$ such that $a_n = 0$. What we want is a decision procedure. Well,
+Is there an $n$ such that $a_n = 0$? What we want is a decision procedure. Well,
 using the material we learned here, we can see that we reduce the problem to:
 given a linear combination of exponentials over the polynomials, can we determine
 whether the equation has a root? Go forth, solve it, and win the Fields medal.
